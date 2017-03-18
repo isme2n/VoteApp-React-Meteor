@@ -1,5 +1,6 @@
 import { createClass } from 'asteroid-isme2n';
 import { setLoggedUser, unsetLoggedUser } from '../actions/LoginActions';
+import { removeVote, insertVote, editVote } from '../actions/VoteActions';
 import store from '../configureStore';
 
 const Asteroid = createClass();
@@ -8,34 +9,34 @@ const asteroid = new Asteroid({
   endpoint: 'ws://localhost:9000/websocket',
 });
 
-// if you want realitme updates in all connected clients
-// subscribe to the publication
 asteroid.subscribe('users');
+asteroid.subscribe('votes');
 
 asteroid.ddp.on('added', (doc) => {
-  // we need proper document object format here
-
   if (doc.collection === 'users') {
     store.dispatch(setLoggedUser(doc.fields));
   }
-});
-
-asteroid.ddp.on('updated', (doc) => {
-  if (doc.collection === 'users') {
-    store.dispatch(setLoggedUser([doc.fields.user.username,doc.fields.password]));
+  if (doc.collection === 'votes') {
+    store.dispatch(insertVote(doc.fields));
   }
 });
 
-asteroid.ddp.on('removed', (removedDoc) => {
 
+asteroid.ddp.on('removed', (removedDoc) => {
   if (removedDoc.collection === 'users') {
     store.dispatch(unsetLoggedUser());
+  }
+  if (removedDoc.collection === 'votes') {
+    store.dispatch(removeVote(removedDoc.id));
   }
 });
 
 asteroid.ddp.on('changed', (updatedDoc) => {
   if (updatedDoc.collection === 'users') {
     store.dispatch(setLoggedUser(updatedDoc.id, updatedDoc.fields.finished));
+  }
+  if (updatedDoc.collection === 'votes') {
+    store.dispatch(editVote(updatedDoc.id, updatedDoc.fields.finished));
   }
 });
 

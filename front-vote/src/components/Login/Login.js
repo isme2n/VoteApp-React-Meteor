@@ -33,11 +33,7 @@ class Login extends Component {
     e.preventDefault();
     asteroid.createUser({
       password: this.state.password,
-      username: this.state.username,
-      profile:{
-        aa:'aa',
-        bb:'bb'
-      }
+      username: this.state.username
     })
       .catch((error) => {
         Alert.error(error.message);

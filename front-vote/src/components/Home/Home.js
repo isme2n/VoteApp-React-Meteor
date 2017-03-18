@@ -7,6 +7,20 @@ import './Home.css';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class Home extends Component{
+  constructor(props){
+    super(props);
+
+    asteroid.call('getVotes').then(votes => {
+      console.log("success");
+      console.log(votes);
+      this.setState({
+        votes : votes
+      })
+    }).catch(err => {
+      console.log("err");
+      console.log(err)
+    })
+  }
   handleLogout(){
     asteroid.logout();
   };
@@ -27,6 +41,8 @@ class Home extends Component{
           <p className="Home-intro">
             To get started, edit <code>src/Home.js</code> and save to reload.
           </p>
+          {this.state.votes ? this.state.votes.map((v, i) =>
+              <RaisedButton style={{margin:'5px'}} key={i}> {v.title} </RaisedButton> ) : null}
         </div>
       );
     }
