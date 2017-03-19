@@ -1,0 +1,8 @@
+
+.voteCard {
+  width:25%;
+  margin:10px;
+  min-width: 300px;
+  display: inline-block;
+  cursor:pointer;
+}

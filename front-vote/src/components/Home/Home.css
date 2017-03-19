@@ -9,17 +9,27 @@
 
 .Home-header {
   background-color: #222;
-  height: 200px;
+  height: 120px;
   padding: 20px;
   color: white;
 }
 
 .Home-intro {
-  font-size: large;
+  font-weight: 800;
+  font-size: 30px;
+}
+
+.logout {
 }
 
 .logout-button {
   margin:10px;
+}
+
+.contents {
+  margin:10px;
+  justify-content: flex-start;
+  flex-direction: row;
 }
 
 @keyframes Home-logo-spin {

@@ -7,6 +7,7 @@ import Avatar from 'material-ui/Avatar';
 import './TopBar.css';
 import Logged from './Logged'
 import asteroid from '../../common/asteroid';
+import { connect } from 'react-redux';
 
 class TopBar extends Component {
 
@@ -30,7 +31,7 @@ class TopBar extends Component {
     return (
       <Paper className="top-bar">
         <AppBar
-          title="React + Redux + Material x Meteor"
+          title="VoteApp"
           style={{backgroundColor:'#000'}}
           onLeftIconButtonTouchTap={() => this.toggleLeftDrawer()}
           iconElementRight={this.state.logged ? <Logged /> : <FlatButton {...this.props} label="Login" />}
@@ -46,7 +47,7 @@ class TopBar extends Component {
               leftAvatar={
                 <Avatar icon={<FontIcon className="material-icons">face</FontIcon>} />
               }
-              primaryText="Your Name"
+              primaryText={this.props.user ? this.props.user.username : null}
               secondaryText="your-email@mail.com"
             />
             <Divider />
@@ -89,4 +90,12 @@ class TopBar extends Component {
   }
 }
 
-export default TopBar;
+const mapDispatchToProps = {
+
+}
+
+const mapStateToProps = (state) => ({
+  user : state.user
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopBar);
