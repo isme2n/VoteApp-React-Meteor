@@ -8,6 +8,7 @@ import './TopBar.css';
 import Logged from './Logged'
 import asteroid from '../../common/asteroid';
 import { connect } from 'react-redux';
+import {browserHistory} from 'react-router';
 
 class TopBar extends Component {
 
@@ -25,6 +26,10 @@ class TopBar extends Component {
 
   handleLogout(){
     asteroid.logout();
+  }
+
+  handleMenu(){
+    browserHistory.push('/');
   }
 
   render() {
@@ -54,29 +59,8 @@ class TopBar extends Component {
 
             <ListItem
               primaryText="Home"
+              onClick={this.handleMenu}
               leftIcon={<FontIcon className="material-icons">home</FontIcon>}
-            />
-            <ListItem
-              primaryText="Shopping"
-              leftIcon={<FontIcon className="material-icons">shopping</FontIcon>}
-            />
-            <ListItem
-              primaryText="Order"
-              leftIcon={<FontIcon className="material-icons">local_offer</FontIcon>}
-            />
-            <ListItem
-              primaryText="About"
-              leftIcon={<FontIcon className="material-icons">grade</FontIcon>}
-            />
-            <Divider />
-
-            <ListItem
-              primaryText="Settings"
-              leftIcon={<FontIcon className="material-icons">settings</FontIcon>}
-            />
-            <ListItem
-              primaryText="Help & feedback"
-              leftIcon={<FontIcon className="material-icons">help</FontIcon>}
             />
             <ListItem
               primaryText="Logout"

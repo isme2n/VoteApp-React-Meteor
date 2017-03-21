@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import BottomBar from '../BottomBar';
 import TopBar from '../TopBar';
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
@@ -16,7 +15,6 @@ class Main extends Component{
             <div className="container" >
               {this.props.children}
             </div>
-          <BottomBar />
         </section>
         <Alert className="alert" position="top-right" effect="jelly"/>
       </div>

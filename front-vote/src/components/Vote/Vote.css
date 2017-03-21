@@ -6,3 +6,10 @@
   display: inline-block;
   cursor:pointer;
 }
+
+.vote {
+  display: inline-block;
+  width:90%;
+  margin:10px;
+  min-width: 300px;
+}

@@ -96,7 +96,7 @@ class Home extends Component{
           </div>
           <div className="contents">
               {vote ? vote.map((v, i) =>
-                <VoteCard key={i} vote={v}/> ) : null}
+                <VoteCard key={i} index={i} vote={v}/> ) : null}
           </div>
           <Dialog
           title="Add Vote Dialog"
