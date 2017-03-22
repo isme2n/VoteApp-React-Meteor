@@ -109,6 +109,7 @@ class Home extends Component{
           <p>Title : </p><input type="text" name="voteTitle" placeholder="vote title" onChange={this.handleChange}></input>
           <p>Date : </p><DatePicker name="start" hintText="start date" onChange={this.handleStartChange}/>
           <DatePicker name="end" hintText="end date" onChange={this.handleEndChange}/>
+          
         </Dialog>
         </div>
       );

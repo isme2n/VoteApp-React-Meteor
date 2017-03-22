@@ -1,6 +1,7 @@
 import { createClass } from 'asteroid-isme2n';
 import { setLoggedUser, unsetLoggedUser } from '../actions/LoginActions';
 import { removeVote, addVote, editVote } from '../actions/VoteActions';
+
 import store from '../configureStore';
 
 const Asteroid = createClass();
