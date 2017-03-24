@@ -8,6 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
+import TextField from 'material-ui/TextField';
 
 import VoteCard from '../Vote/VoteCard'
 import { callAddVote } from '../../actions/VoteAsyncActions';
@@ -20,9 +21,15 @@ class Home extends Component{
     this.state = {
       open: false,
       start : null,
-      end : null
+      end : null,
+      ecnt : 3,
+      elements:[],
+      element1 : "YES",
+      element2 : "NO",
+      element3 : "I DON'T CARE"
     }
 
+    this.handleElementChange = this.handleElementChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -35,7 +42,7 @@ class Home extends Component{
   };
 
   handleAddVote(){
-    this.props.dispatchCallAddVote({ title : this.state.voteTitle , start : this.state.start , end : this.state.end, host : this.props.user.username});
+    this.props.dispatchCallAddVote({ title : this.state.voteTitle , start : this.state.start , end : this.state.end, host : this.props.user.username, elements: this.state.elements});
     this.handleClose();
   };
 
@@ -49,6 +56,12 @@ class Home extends Component{
     });
   }
 
+  handleElementChange(e){
+    var elements = this.state.elements.slice();
+    elements[e.target.name] = {value : e.target.value};
+    this.setState({ elements: elements })
+  }
+
   handleStartChange = (event,date) => {
     var time = date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate();
     this.setState({
@@ -60,6 +73,18 @@ class Home extends Component{
     this.setState({
       end : date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate()
     });
+  }
+
+  addElement(){
+    this.setState({
+      ecnt : this.state.ecnt+1
+    })
+  }
+
+  removeElement(){
+    this.setState({
+      ecnt : this.state.ecnt-1
+    })
   }
 
   render() {
@@ -79,6 +104,10 @@ class Home extends Component{
     ];
 
     if (user && user.username) {
+      const children = [];
+      for(var i=0; i < this.state.ecnt; i++) {
+        children.push(<TextField type="text" name={""+i} key={i} placeholder={"element"+i} onChange={this.handleElementChange}/>);
+      };
       return (
         <div className="Home">
           <div className="Home-header">
@@ -105,12 +134,24 @@ class Home extends Component{
           minDate={new Date}
           open={this.state.open}
           onRequestClose={this.handleClose}
-        >
-          <p>Title : </p><input type="text" name="voteTitle" placeholder="vote title" onChange={this.handleChange}></input>
-          <p>Date : </p><DatePicker name="start" hintText="start date" onChange={this.handleStartChange}/>
-          <DatePicker name="end" hintText="end date" onChange={this.handleEndChange}/>
-          
-        </Dialog>
+          >
+            <div className="titleBox">
+              <p>Title : </p>
+              <TextField type="text" name="voteTitle" placeholder="vote title" onChange={this.handleChange}></TextField>
+            </div>
+            <div className="dateBox">
+              <p>Date : </p>
+              <DatePicker name="start" hintText="start date" onChange={this.handleStartChange}/>
+              <DatePicker name="end" hintText="end date" onChange={this.handleEndChange}/>
+            </div>
+            <div className="elementBox">
+              <p>항목 : </p>
+              {children}
+              <br/>
+              <FlatButton onClick={this.addElement.bind(this)}>add</FlatButton>
+              <FlatButton onClick={this.removeElement.bind(this)}>remove</FlatButton>
+            </div>
+          </Dialog>
         </div>
       );
     }

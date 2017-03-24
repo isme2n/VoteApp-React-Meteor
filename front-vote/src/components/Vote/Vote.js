@@ -1,11 +1,22 @@
 import React, {Component} from 'react';
 import {Card, CardActions, CardHeader, CardTitle, CardText} from 'material-ui/Card';
+import Chip from 'material-ui/Chip';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import FlatButton from 'material-ui/FlatButton';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import Toggle from 'material-ui/Toggle';
 
 import './Vote.css';
+
+const styles = {
+  hr: {
+    margin : 32
+  },
+  radioButton: {
+    marginBottom: 16,
+  },
+};
 
 class Vote extends Component{
   handleVoteCard(){
@@ -20,8 +31,20 @@ class Vote extends Component{
       { vote.length > 0 ?
         <Card className="vote">
           <CardTitle title={vote[vid].title} subtitle={vote[vid].host}/>
+          <p>{vote[vid].start} ~ {vote[vid].end}</p>
+          <p>{vote[vid].finished ? 'Finished' : 'Proceeding'}</p>
+          <hr style={styles.hr}/>
           <CardText>
-            {vote[vid].elements.map((e,i)=> <p>{e.value}</p>)}
+            <RadioButtonGroup name="elements" >
+              {vote[vid].elements.map((e,i)=>
+                <RadioButton
+                key={i}
+                value={e.value}
+                label={e.value}
+                style={styles.radioButton}
+                />
+              )}
+            </RadioButtonGroup>
           </CardText>
       </Card> : null}
 

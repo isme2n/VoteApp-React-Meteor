@@ -18,6 +18,7 @@ class TopBar extends Component {
       logged: this.props.logged,
       isLeftDrawerOpened: false
     };
+    this.handleMenu = this.handleMenu.bind(this);
   }
 
   toggleLeftDrawer() {
@@ -29,6 +30,7 @@ class TopBar extends Component {
   }
 
   handleMenu(){
+    this.setState({ isLeftDrawerOpened: !this.state.isLeftDrawerOpened });
     browserHistory.push('/');
   }
 

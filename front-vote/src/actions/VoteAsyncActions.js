@@ -1,9 +1,9 @@
 import asteroid from '../common/asteroid';
 import { addVote, getAllVote, removeVote, editVote } from './VoteActions';
 
-export function callAddVote(message) {
-  return dispatch => asteroid.call('addVote', message)
-      .then(result => dispatch(addVote({ _id: result, ...message })));
+export function callAddVote(vote) {
+  return dispatch => asteroid.call('addVote', vote)
+      .then(result => dispatch(addVote({ _id: result, ...vote })));
 }
 
 export function callGetAllVote() {
