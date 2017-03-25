@@ -21,7 +21,7 @@ Meteor.methods({
       return Vote.find().fetch();
     },
     addVote(vote) {
-      return Vote.insert({...vote,finished:false});
+      return Vote.insert({...vote});
     },
     removeVote(id) {
       return Vote.remove({_id: id});
