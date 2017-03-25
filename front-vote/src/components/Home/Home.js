@@ -9,24 +9,21 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
+import moment from 'moment';
 
 import VoteCard from '../Vote/VoteCard'
 import { callAddVote } from '../../actions/VoteAsyncActions';
 
-var voteList;
 class Home extends Component{
   constructor(props){
     super(props);
 
     this.state = {
       open: false,
-      start : null,
+      start : new Date,
       end : null,
       ecnt : 3,
-      elements:[],
-      element1 : "YES",
-      element2 : "NO",
-      element3 : "I DON'T CARE"
+      elements:[{ value : "YES"},{ value : "NO"},{ value : "I DON'T CARE"}]
     }
 
     this.handleElementChange = this.handleElementChange.bind(this);
@@ -65,7 +62,8 @@ class Home extends Component{
   handleStartChange = (event,date) => {
     var time = date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate();
     this.setState({
-      start : time
+      start : time,
+      minDate : date
     });
   }
 
@@ -125,13 +123,12 @@ class Home extends Component{
           </div>
           <div className="contents">
               {vote ? vote.map((v, i) =>
-                <VoteCard key={i} index={i} vote={v}/> ) : null}
+                <VoteCard key={i} index={i} vote={v} host={user.username}/> ) : null}
           </div>
           <Dialog
           title="Add Vote Dialog"
           actions={actions}
           modal={false}
-          minDate={new Date}
           open={this.state.open}
           onRequestClose={this.handleClose}
           >
@@ -141,11 +138,11 @@ class Home extends Component{
             </div>
             <div className="dateBox">
               <p>Date : </p>
-              <DatePicker name="start" hintText="start date" onChange={this.handleStartChange}/>
-              <DatePicker name="end" hintText="end date" onChange={this.handleEndChange}/>
+              <DatePicker name="start" hintText="start date" minDate={new Date} onChange={this.handleStartChange}/>
+              <DatePicker name="end" hintText="end date" minDate={this.state.minDate} onChange={this.handleEndChange}/>
             </div>
             <div className="elementBox">
-              <p>항목 : </p>
+              <p>Elements : </p>
               {children}
               <br/>
               <FlatButton onClick={this.addElement.bind(this)}>add</FlatButton>
