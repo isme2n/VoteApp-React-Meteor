@@ -32,7 +32,6 @@ class Vote extends Component{
         <Card className="vote">
           <CardTitle title={vote[vid].title} subtitle={vote[vid].host}/>
           <p>{vote[vid].start} ~ {vote[vid].end}</p>
-          <p>{vote[vid].finished ? 'Finished' : 'Proceeding'}</p>
           <hr style={styles.hr}/>
           <CardText>
             <RadioButtonGroup name="elements" >
