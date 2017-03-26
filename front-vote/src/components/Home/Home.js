@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Login from '../Login/Login';
 import asteroid from '../../common/asteroid';
-import logo from './logo.svg';
 import './Home.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
-import moment from 'moment';
 
 import VoteCard from '../Vote/VoteCard'
 import { callAddVote } from '../../actions/VoteAsyncActions';
@@ -20,7 +18,7 @@ class Home extends Component{
 
     this.state = {
       open: false,
-      start : new Date,
+      start : new Date(),
       end : null,
       ecnt : 3,
       elements:[{ value : "YES"},{ value : "NO"},{ value : "I DON'T CARE"}]
@@ -31,7 +29,10 @@ class Home extends Component{
   }
 
   handleOpen(){
-    this.setState({open: true});
+    this.setState({
+      open: true,
+      ecnt : 3
+    });
   };
 
   handleClose(){
@@ -138,7 +139,7 @@ class Home extends Component{
             </div>
             <div className="dateBox">
               <p>Date : </p>
-              <DatePicker name="start" hintText="start date" minDate={new Date} onChange={this.handleStartChange}/>
+              <DatePicker name="start" hintText="start date" minDate={new Date()} onChange={this.handleStartChange}/>
               <DatePicker name="end" hintText="end date" minDate={this.state.minDate} onChange={this.handleEndChange}/>
             </div>
             <div className="elementBox">

@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import {Card, CardActions, CardHeader, CardTitle, CardText} from 'material-ui/Card';
-import Chip from 'material-ui/Chip';
+import {Card, CardTitle, CardText} from 'material-ui/Card';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-import FlatButton from 'material-ui/FlatButton';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-import Toggle from 'material-ui/Toggle';
 
 import './Vote.css';
 
