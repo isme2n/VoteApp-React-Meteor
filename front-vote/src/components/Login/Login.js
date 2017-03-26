@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import asteroid from '../../common/asteroid';
 import {FlatButton, TextField} from 'material-ui';
 import Alert from 'react-s-alert';
-import { browserHistory } from 'react-router';
 
 class Login extends Component {
   constructor(props){
