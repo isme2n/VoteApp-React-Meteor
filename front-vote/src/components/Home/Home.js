@@ -132,6 +132,7 @@ class Home extends Component{
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
+          autoScrollBodyContent={true}
           >
             <div className="titleBox">
               <p>Title : </p>
