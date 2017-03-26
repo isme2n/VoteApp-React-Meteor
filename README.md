@@ -1,7 +1,7 @@
-# react-redux-material-meteor
+# VoteApp-React-Meteor
 react-redux-material front-end x meteor back-end
 
-# Overview 
+# Overview
 
 This project is two applications. One is a client app, including React, and the other is a backend app based on Meteor.
 
@@ -9,7 +9,7 @@ By separating the apps, you can work with one Meteor backend and a variety of ot
 
 The communication between the backend and the client app is done with DDP (Distributed Data Protocol). The backend and client only talk to each other in the same language without knowing each other at all.
 
-
+[See Demo](http://13.124.39.17:3000/)
 
 # Stack
 
