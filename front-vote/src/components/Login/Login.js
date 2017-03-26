@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import asteroid from '../../common/asteroid';
 import {FlatButton, TextField} from 'material-ui';
 import Alert from 'react-s-alert';
+import { browserHistory } from 'react-router';
 
 class Login extends Component {
   constructor(props){
@@ -23,8 +24,7 @@ class Login extends Component {
     asteroid.loginWithPassword({
       password: this.state.password,
       username: this.state.username,
-    })
-      .catch((error) => {
+    }).catch((error) => {
         Alert.error(error.message);
       });
   };
@@ -34,8 +34,7 @@ class Login extends Component {
     asteroid.createUser({
       password: this.state.password,
       username: this.state.username
-    })
-      .catch((error) => {
+    }).catch((error) => {
         Alert.error(error.message);
       });
     };
@@ -59,7 +58,6 @@ class Login extends Component {
   render(){
     return(
       <div>
-        <form onSubmit={this.handleLogin} className="login-form">
           <div>
             <TextField
                hintText="Username"
@@ -74,10 +72,9 @@ class Login extends Component {
             <FlatButton disabled> Hint: admin | pass</FlatButton>
           </div>
           <div>
-            <FlatButton type="submit" className="submit-button" onClick={this.handleLogin}>Login</FlatButton>
+            <FlatButton type="button" className="submit-button" onClick={this.handleLogin}>Login</FlatButton>
             <FlatButton type="button" className="submit-button" onClick={this.handleSignup} >Sign Up</FlatButton>
           </div>
-        </form>
       </div>
     );
   }
