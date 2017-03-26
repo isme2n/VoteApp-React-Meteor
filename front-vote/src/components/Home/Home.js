@@ -15,11 +15,11 @@ import { callAddVote } from '../../actions/VoteAsyncActions';
 class Home extends Component{
   constructor(props){
     super(props);
-
+    const date = new Date();
     this.state = {
       open: false,
-      start : new Date(),
-      end : null,
+      start : date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate(),
+      end : date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate(),
       ecnt : 3,
       elements:[{ value : "YES"},{ value : "NO"},{ value : "I DON'T CARE"}]
     }
