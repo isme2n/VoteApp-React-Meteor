@@ -24,7 +24,7 @@ class VoteCard extends Component{
 
 
   render(){
-    const isFinished = !(Date() >= this.props.vote.end);
+    const isFinished = (new Date() > new Date(this.props.vote.end).setHours(24));
     return (
       <Card className={isFinished ? "archiveVote" : "voteCard"} style={isFinished ? {backgroundColor : '#fff', opacity : '0.4'} : {cusor : 'pointer'}} onClick={isFinished ? null : this.handleVoteCard.bind(this,this.props.index)} >
         <CardTitle title={this.props.vote.title} subtitle={this.props.vote.host}/>
