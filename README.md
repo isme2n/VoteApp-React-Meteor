@@ -35,7 +35,7 @@ Routing and Login functions have been implemented.
 # How does it work?
 Clone the project and open the Meteor backend as shown below.
 
->$ cd {project_name}/rm-back
+>$ cd {project_name}/back-vote
 >
 >$ npm install
 >
@@ -43,7 +43,7 @@ Clone the project and open the Meteor backend as shown below.
 
 Open the backend on port 9000, expand one terminal and open the client.
 
->$ cd {project_name}/rm-front
+>$ cd {project_name}/front-vote
 >
 >$ npm install
 >
