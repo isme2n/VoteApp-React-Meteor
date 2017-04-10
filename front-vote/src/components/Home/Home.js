@@ -18,8 +18,8 @@ class Home extends Component{
     const date = new Date();
     this.state = {
       open: false,
-      start : date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate(),
-      end : date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate(),
+      start : date,
+      end : date,
       ecnt : 3,
       elements:[{ value : "YES"},{ value : "NO"},{ value : "I DON'T CARE"}]
     }
@@ -61,16 +61,17 @@ class Home extends Component{
   }
 
   handleStartChange = (event,date) => {
-    var time = date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate();
+    // var time = date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate();
     this.setState({
-      start : time,
-      minDate : date
+      start : date,
+      minDate : date,
+      end : date
     });
   }
 
   handleEndChange = (event,date) => {
     this.setState({
-      end : date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate()
+      end : date
     });
   }
 
@@ -140,8 +141,8 @@ class Home extends Component{
             </div>
             <div className="dateBox">
               <p>Date : </p>
-              <DatePicker name="start" hintText="start date" minDate={new Date()} onChange={this.handleStartChange}/>
-              <DatePicker name="end" hintText="end date" minDate={this.state.minDate} onChange={this.handleEndChange}/>
+              <DatePicker name="start" hintText="start date" minDate={new Date()} value={this.state.start} onChange={this.handleStartChange}/>
+              <DatePicker name="end" hintText="end date" minDate={this.state.minDate} value={this.state.end} onChange={this.handleEndChange}/>
             </div>
             <div className="elementBox">
               <p>Elements : </p>

@@ -3,6 +3,7 @@ import {Card, CardTitle, CardText} from 'material-ui/Card';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
+import { showDate } from '../../common/util';
 
 import './Vote.css';
 
@@ -16,8 +17,24 @@ const styles = {
 };
 
 class Vote extends Component{
+  constructor(props){
+    super(props);
+
+    this.state = {
+      vote : null
+    }
+
+    this.changeVote = this.changeVote.bind(this);
+  }
   handleVoteCard(){
     browserHistory.push('/vote');
+  }
+
+  changeVote(e){
+    console.log(e.target.value);
+    this.setState({
+      vote : e.target.value
+    })
   }
 
   render(){
@@ -28,10 +45,12 @@ class Vote extends Component{
       { vote.length > 0 ?
         <Card className="vote">
           <CardTitle title={vote[vid].title} subtitle={vote[vid].host}/>
-          <p>{vote[vid].start} ~ {vote[vid].end}</p>
+          <p>{showDate(vote[vid].start)} ~ {showDate(vote[vid].end)}</p>
           <hr style={styles.hr}/>
           <CardText>
-            <RadioButtonGroup name="elements" >
+            <RadioButtonGroup
+              name="elements" 
+              onChange={this.changeVote} >
               {vote[vid].elements.map((e,i)=>
                 <RadioButton
                 key={i}

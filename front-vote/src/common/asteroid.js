@@ -7,7 +7,8 @@ import store from '../configureStore';
 const Asteroid = createClass();
 // Connect to a Meteor backend
 const asteroid = new Asteroid({
-  endpoint: 'ws://13.124.39.17:9000/websocket',
+//  endpoint: 'ws://13.124.39.17:9000/websocket',
+  endpoint: 'ws://localhost:9000/websocket',
 });
 
 asteroid.subscribe('users');

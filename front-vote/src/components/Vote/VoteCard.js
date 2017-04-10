@@ -4,6 +4,7 @@ import IconButton from 'material-ui/IconButton';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { callRemoveVote } from '../../actions/VoteAsyncActions';
+import { showDate } from '../../common/util';
 
 import './Vote.css';
 
@@ -28,7 +29,7 @@ class VoteCard extends Component{
     return (
       <Card className={isFinished ? "archiveVote" : "voteCard"} style={isFinished ? {backgroundColor : '#fff', opacity : '0.4'} : {cusor : 'pointer'}} onClick={isFinished ? null : this.handleVoteCard.bind(this,this.props.index)} >
         <CardTitle title={this.props.vote.title} subtitle={this.props.vote.host}/>
-        <p>{this.props.vote.start} ~ {this.props.vote.end}</p>
+        <p>{showDate(this.props.vote.start)} ~ {showDate(this.props.vote.end)}</p>
         <p>{ isFinished ? 'Finished' :'Proceeding'}</p>
         { (this.props.host === this.props.vote.host) ?
           <IconButton
