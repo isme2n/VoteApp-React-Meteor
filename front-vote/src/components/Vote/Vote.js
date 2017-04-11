@@ -21,19 +21,20 @@ class Vote extends Component{
     super(props);
 
     this.state = {
-      vote : null
+      choose : null
     }
 
-    this.changeVote = this.changeVote.bind(this);
+    this.changeChoose = this.changeChoose.bind(this);
   }
+
   handleVoteCard(){
     browserHistory.push('/vote');
   }
 
-  changeVote(e){
+  changeChoose(e){
     console.log(e.target.value);
     this.setState({
-      vote : e.target.value
+      choose : e.target.value
     })
   }
 
@@ -49,8 +50,8 @@ class Vote extends Component{
           <hr style={styles.hr}/>
           <CardText>
             <RadioButtonGroup
-              name="elements" 
-              onChange={this.changeVote} >
+              name="elements"
+              onChange={this.changeChoose} >
               {vote[vid].elements.map((e,i)=>
                 <RadioButton
                 key={i}
