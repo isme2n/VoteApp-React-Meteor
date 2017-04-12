@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-import { browserHistory } from 'react-router';
+import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
+import { callSaveVote } from '../../actions/VoteAsyncActions';
 import { showDate } from '../../common/util';
 
 import './Vote.css';
@@ -10,6 +11,9 @@ import './Vote.css';
 const styles = {
   hr: {
     margin : 32
+  },
+  hr2: {
+    margin : 30
   },
   radioButton: {
     marginBottom: 16,
@@ -25,10 +29,12 @@ class Vote extends Component{
     }
 
     this.changeChoose = this.changeChoose.bind(this);
+    this.handleVote = this.handleVote.bind(this);
   }
 
-  handleVoteCard(){
-    browserHistory.push('/vote');
+  handleVote(){
+    this.props.dispatchCallSaveVote(this.props.vote[this.props.params.vid]._id, this.state.choose);
+
   }
 
   changeChoose(e){
@@ -61,17 +67,21 @@ class Vote extends Component{
                 />
               )}
             </RadioButtonGroup>
+            <hr style={styles.hr2}/>
+            <RaisedButton onClick={this.handleVote}> VOTE </RaisedButton>
           </CardText>
       </Card> : null}
-
     </div>
     );
   }
 }
+
+
 const mapStateToProps = state => ({
   vote : state.vote
 });
 const mapDispatchToProps = dispatch => ({
+    dispatchCallSaveVote : (_id,data) => dispatch(callSaveVote(_id,data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Vote);

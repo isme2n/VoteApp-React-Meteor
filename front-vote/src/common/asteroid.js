@@ -1,6 +1,6 @@
 import { createClass } from 'asteroid-isme2n';
 import { setLoggedUser, unsetLoggedUser } from '../actions/LoginActions';
-import { removeVote, addVote, editVote } from '../actions/VoteActions';
+import { removeVote, addVote, editVote, saveVote } from '../actions/VoteActions';
 
 import store from '../configureStore';
 
@@ -21,6 +21,10 @@ asteroid.ddp.on('added', (doc) => {
   if (doc.collection === 'votes') {
     const docObj = Object.assign({}, doc.fields, { _id: doc.id });
     store.dispatch(addVote(docObj));
+  }
+  if (doc.collection === 'did_votes') {
+    const docObj = Object.assign({}, doc.fields, { _id: doc.id });
+    store.dispatch(saveVote(docObj));
   }
 });
 

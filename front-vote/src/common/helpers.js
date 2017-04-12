@@ -30,3 +30,7 @@ export const add = (state, action) => {
   }
   return state;
 };
+
+export const save = (state, action) => {
+  return state.concat([action.data]);
+};

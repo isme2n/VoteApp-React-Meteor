@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
 
 const Vote = new Meteor.Collection('votes');
+const didVote = new Meteor.Collection('did_votes');
 
 Meteor.publish('users', function () {
   return Meteor.users.find({_id: this.userId},
@@ -11,6 +12,10 @@ Meteor.publish('users', function () {
 
 Meteor.publish('votes', function(){
   return Vote.find({});
+})
+
+Meteor.publish('did_votes', function(){
+  return didVote.find({});
 })
 
 Meteor.methods({
@@ -25,6 +30,9 @@ Meteor.methods({
     },
     removeVote(id) {
       return Vote.remove({_id: id});
+    },
+    saveVote(id,value) {
+      return didVote.insert({vote_id:id,value:value});
     },
     editVote(id, finished) {
       return Vote.update({_id: id}, {$set: {finished: finished}});

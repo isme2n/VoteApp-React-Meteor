@@ -5,8 +5,8 @@ import asteroid from '../../common/asteroid';
 import './Home.css';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import VoteList from '../VoteList/VoteList';
-import VoteInputDialog from '../VoteInputDialog/VoteInputDialog';
+import VoteList from '../Vote/VoteList';
+import VoteInputDialog from '../Vote/VoteInputDialog';
 
 class Home extends Component{
   constructor(props){
@@ -56,7 +56,8 @@ class Home extends Component{
 }
 
 Home.propTypes = {
-  user: React.PropTypes.object
+  user: React.PropTypes.object,
+  vote: React.PropTypes.array,
 };
 
 const mapStateToProps = state => ({

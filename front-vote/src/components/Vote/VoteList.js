@@ -13,6 +13,11 @@ class VoteList extends Component {
     );
   }
 }
+
+VoteList.propTypes = {
+  user: React.PropTypes.object,
+  vote: React.PropTypes.array,
+};
 const mapStateToProps = state => ({
   user: state.user,
   vote : state.vote

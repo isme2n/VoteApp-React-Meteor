@@ -7,6 +7,8 @@ export const REMOVE_VOTE = 'REMOVE_VOTE';
 export const EDIT_VOTE = 'EDIT_VOTE';
 export const GET_ALL_VOTE = 'GET_ALL_VOTE';
 
+export const SAVE_VOTE = 'SAVE_VOTE';
+
 /*
  * action creators
  */
@@ -36,6 +38,14 @@ export function editVote(_id, finished) {
 export function getAllVote(data) {
   return {
     type: GET_ALL_VOTE,
+    data,
+  };
+}
+
+export function saveVote(_id,data) {
+  return {
+    type: SAVE_VOTE,
+    _id,
     data,
   };
 }

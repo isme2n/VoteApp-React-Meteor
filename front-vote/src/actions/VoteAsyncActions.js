@@ -1,5 +1,5 @@
 import asteroid from '../common/asteroid';
-import { addVote, getAllVote, removeVote, editVote } from './VoteActions';
+import { addVote, getAllVote, removeVote, editVote, saveVote } from './VoteActions';
 
 export function callAddVote(vote) {
   return dispatch => asteroid.call('addVote', vote)
@@ -19,4 +19,9 @@ export function callRemoveVote(_id) {
 export function callEditVote(_id, finished) {
   return dispatch => asteroid.call('editVote', _id, finished)
       .then(() => dispatch(editVote(_id, finished)));
+}
+
+export function callSaveVote(_id, value) {
+  return dispatch => asteroid.call('saveVote', _id, value)
+      .then(() => dispatch(saveVote(_id, value)));
 }
