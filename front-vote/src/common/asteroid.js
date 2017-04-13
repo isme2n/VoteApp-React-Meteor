@@ -13,6 +13,7 @@ const asteroid = new Asteroid({
 
 asteroid.subscribe('users');
 asteroid.subscribe('votes');
+asteroid.subscribe('did_votes');
 
 asteroid.ddp.on('added', (doc) => {
   if (doc.collection === 'users') {
@@ -36,6 +37,9 @@ asteroid.ddp.on('removed', (removedDoc) => {
   if (removedDoc.collection === 'votes') {
     store.dispatch(removeVote(removedDoc.id));
   }
+  if (removedDoc.collection === 'did_votes') {
+    store.dispatch(removeVote(removedDoc.id));
+  }
 });
 
 asteroid.ddp.on('changed', (updatedDoc) => {
@@ -43,6 +47,9 @@ asteroid.ddp.on('changed', (updatedDoc) => {
     store.dispatch(setLoggedUser(updatedDoc.id, updatedDoc.fields.finished));
   }
   if (updatedDoc.collection === 'votes') {
+    store.dispatch(editVote(updatedDoc.id, updatedDoc.fields.finished));
+  }
+  if (updatedDoc.collection === 'did_votes') {
     store.dispatch(editVote(updatedDoc.id, updatedDoc.fields.finished));
   }
 });

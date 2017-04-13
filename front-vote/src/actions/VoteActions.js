@@ -42,10 +42,9 @@ export function getAllVote(data) {
   };
 }
 
-export function saveVote(_id,data) {
+export function saveVote(data) {
   return {
     type: SAVE_VOTE,
-    _id,
     data,
   };
 }

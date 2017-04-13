@@ -32,5 +32,10 @@ export const add = (state, action) => {
 };
 
 export const save = (state, action) => {
-  return state.concat([action.data]);
+  const newItemId = action.data._id;
+  const isNotUniq = state.find(i => i._id === newItemId);
+  if (!isNotUniq) {
+    return state.concat([action.data]);
+  }
+  return state;
 };

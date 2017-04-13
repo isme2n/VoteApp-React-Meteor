@@ -21,7 +21,7 @@ export function callEditVote(_id, finished) {
       .then(() => dispatch(editVote(_id, finished)));
 }
 
-export function callSaveVote(_id, value) {
-  return dispatch => asteroid.call('saveVote', _id, value)
-      .then(() => dispatch(saveVote(_id, value)));
+export function callSaveVote(data) {
+  return dispatch => asteroid.call('saveVote', data.vote_id, data.value)
+      .then(result => dispatch(saveVote({ _id: result, ...data })));
 }

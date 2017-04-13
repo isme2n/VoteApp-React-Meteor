@@ -19,26 +19,55 @@ const styles = {
     marginBottom: 16,
   },
 };
-
 class Vote extends Component{
   constructor(props){
     super(props);
 
     this.state = {
-      choose : null
+      choose : null,
+      did: false
     }
 
     this.changeChoose = this.changeChoose.bind(this);
     this.handleVote = this.handleVote.bind(this);
   }
 
+
+  componentDidUpdate(prevProps,prevState){
+    if(prevProps !== this.props){
+      for(var i = 0; i < this.props.didVote.length; i++) {
+      if (this.props.didVote[i].vote_id === this.props.vote[this.props.params.vid]._id) {
+        this.setState({
+          did : true
+        })
+          break;
+        }
+      }
+    }
+  }
+
+  componentDidMount(prevProps,prevState){
+    if(prevProps !== this.props){
+      for(var i = 0; i < this.props.didVote.length; i++) {
+      if (this.props.didVote[i].vote_id === this.props.vote[this.props.params.vid]._id) {
+        this.setState({
+          did : true
+        })
+          break;
+        }
+      }
+    }
+  }
+
+  componentWillUnmount(){
+  }
+
   handleVote(){
-    this.props.dispatchCallSaveVote(this.props.vote[this.props.params.vid]._id, this.state.choose);
+    this.props.dispatchCallSaveVote({vote_id:this.props.vote[this.props.params.vid]._id, value:this.state.choose});
 
   }
 
   changeChoose(e){
-    console.log(e.target.value);
     this.setState({
       choose : e.target.value
     })
@@ -49,7 +78,7 @@ class Vote extends Component{
     const { vid } = this.props.params;
     return (
     <div>
-      { vote.length > 0 ?
+      { vote[vid] ?
         <Card className="vote">
           <CardTitle title={vote[vid].title} subtitle={vote[vid].host}/>
           <p>{showDate(vote[vid].start)} ~ {showDate(vote[vid].end)}</p>
@@ -64,6 +93,7 @@ class Vote extends Component{
                 value={e.value}
                 label={e.value}
                 style={styles.radioButton}
+                disabled={this.state.did}
                 />
               )}
             </RadioButtonGroup>
@@ -78,10 +108,11 @@ class Vote extends Component{
 
 
 const mapStateToProps = state => ({
-  vote : state.vote
+  vote : state.vote,
+  didVote : state.didVote
 });
 const mapDispatchToProps = dispatch => ({
-    dispatchCallSaveVote : (_id,data) => dispatch(callSaveVote(_id,data)),
+    dispatchCallSaveVote : (data) => dispatch(callSaveVote(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Vote);
