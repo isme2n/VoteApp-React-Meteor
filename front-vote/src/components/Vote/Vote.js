@@ -3,7 +3,7 @@ import {Card, CardTitle, CardText} from 'material-ui/Card';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
-import { callSaveVote } from '../../actions/VoteAsyncActions';
+import { callSaveVote, callGetDidVote } from '../../actions/VoteAsyncActions';
 import { showDate } from '../../common/util';
 
 import './Vote.css';
@@ -35,6 +35,7 @@ class Vote extends Component{
 
   componentDidUpdate(prevProps,prevState){
     if(prevProps !== this.props){
+    //  this.props.dispatchCallGetDidVote(this.props.vote[this.props.params.vid]._id);
       for(var i = 0; i < this.props.didVote.length; i++) {
       if (this.props.didVote[i].vote_id === this.props.vote[this.props.params.vid]._id) {
         this.setState({
@@ -48,6 +49,7 @@ class Vote extends Component{
 
   componentDidMount(prevProps,prevState){
     if(prevProps !== this.props){
+    //  this.props.dispatchCallGetDidVote(this.props.vote[this.props.params.vid]._id);
       for(var i = 0; i < this.props.didVote.length; i++) {
       if (this.props.didVote[i].vote_id === this.props.vote[this.props.params.vid]._id) {
         this.setState({
@@ -74,7 +76,7 @@ class Vote extends Component{
   }
 
   render(){
-    const { vote } = this.props;
+    const { vote, didVote } = this.props;
     const { vid } = this.props.params;
     return (
     <div>
@@ -86,7 +88,7 @@ class Vote extends Component{
           <CardText>
             <RadioButtonGroup
               name="elements"
-              onChange={this.changeChoose} >
+              onChange={this.changeChoose}>
               {vote[vid].elements.map((e,i)=>
                 <RadioButton
                 key={i}
@@ -113,6 +115,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
     dispatchCallSaveVote : (data) => dispatch(callSaveVote(data)),
+    dispatchCallGetDidVote : (data) => dispatch(callGetDidVote(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Vote);

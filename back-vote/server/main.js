@@ -22,6 +22,9 @@ Meteor.methods({
     getVote(id) {
       return Vote.findOne(id);
     },
+    getDidVote(id) {
+      return didVote.findOne({vote_id:id});
+    },
     getVotes() {
       return Vote.find().fetch();
     },
